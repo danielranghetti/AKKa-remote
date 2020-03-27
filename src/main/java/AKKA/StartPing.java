@@ -14,7 +14,7 @@ public class StartPing {
         // Criando o ator
         ActorRef actorRef = system.actorOf(Props.create(AtorPing.class),"atorPing");
         // Enviando a mensagem ao ator
-        actorRef.tell(new Mensagem.Iniciar(), null);
+        actorRef.tell(new Mensagem.Iniciar(), ActorRef.noSender());
         system.getWhenTerminated();
 
 
