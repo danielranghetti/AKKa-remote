@@ -1,7 +1,6 @@
-package AKKA;
+package AKKA.pong;
 
 
-import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
 import com.typesafe.config.ConfigFactory;

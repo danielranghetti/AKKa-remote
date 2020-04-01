@@ -1,4 +1,4 @@
-package AKKA;
+package AKKA.mensagem;
 
 import java.io.Serializable;
 

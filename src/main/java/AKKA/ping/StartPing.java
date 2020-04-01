@@ -1,6 +1,7 @@
-package AKKA;
+package AKKA.ping;
 
 
+        import AKKA.mensagem.Mensagem;
         import akka.actor.ActorRef;
         import akka.actor.ActorSystem;
         import akka.actor.Props;

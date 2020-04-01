@@ -1,5 +1,6 @@
-package AKKA;
+package AKKA.pong;
 
+import AKKA.mensagem.Mensagem;
 import akka.actor.ActorSelection;
 import akka.actor.UntypedAbstractActor;
 import akka.event.Logging;
