@@ -1,7 +1,9 @@
 package AKKA.mensagem;
 
-import java.io.Serializable;
+import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
+@Service
 public class Mensagem {
 
 

@@ -1,11 +1,13 @@
 package AKKA.ping;
 
+import AKKA.configuracao.Actor;
 import AKKA.mensagem.Mensagem;
 import akka.actor.ActorSelection;
 import akka.actor.UntypedAbstractActor;
 import akka.event.Logging;
 import akka.event.LoggingAdapter;
 
+@Actor
 public class AtorPing extends UntypedAbstractActor {
     LoggingAdapter loggingAdapter = Logging.getLogger(getContext().system(), this);
 
