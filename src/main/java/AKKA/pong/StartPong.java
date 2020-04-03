@@ -28,7 +28,7 @@ public class StartPong {
         ActorSystem system = ActorSystem.create("AkkaRemotePong", ConfigFactory.load().getConfig("AkkaRemotePong"));
         SpringExtension.getInstance().get(system).initialize(context);
 
-        system.actorOf(SpringProps.create(system, AtorPong.class), "AtorPong");
+        system.actorOf(SpringProps.create(system, SupervisorAtorPong.class), "AtorPong");
 
         system.getWhenTerminated();
     }

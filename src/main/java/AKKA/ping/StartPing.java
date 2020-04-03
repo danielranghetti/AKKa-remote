@@ -33,7 +33,7 @@ public class StartPing {
                 ConfigFactory.load().getConfig("AkkaRemotePing"));
         // Criando o ator
         SpringExtension.getInstance().get(system).initialize(context);
-        ActorRef actorRef = system.actorOf(SpringProps.create(system,AtorPing.class), "atorPing");
+        ActorRef actorRef = system.actorOf(SpringProps.create(system,SupervisorAtorPing.class), "atorPing");
         // Enviando a mensagem ao ator
         actorRef.tell(new Mensagem.Iniciar(), ActorRef.noSender());
         system.getWhenTerminated();
