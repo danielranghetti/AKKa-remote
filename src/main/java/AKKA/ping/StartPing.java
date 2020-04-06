@@ -17,11 +17,14 @@ import javax.annotation.PostConstruct;
 @SpringBootApplication
 public class StartPing {
 
+
     @Autowired
     private ApplicationContext context;
 
     public static void main(String[] args) {
+        System.getProperties().put( "server.port", 8081);
         SpringApplication.run(StartPing.class, args);
+
 
 
     }

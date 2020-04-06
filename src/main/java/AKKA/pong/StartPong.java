@@ -18,6 +18,7 @@ public class StartPong {
     private ApplicationContext context;
 
     public static void main(String[] args) {
+        System.getProperties().put( "server.port", 8080);
         SpringApplication.run(StartPong.class, args);
     }
 
