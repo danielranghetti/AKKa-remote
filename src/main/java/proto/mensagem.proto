@@ -1,0 +1,20 @@
+syntax="proto3";
+
+package serializacao;
+
+option java_package = "protobuf";
+option java_outer_classname = "AkkaOuterClass";
+option java_multiple_files = true;
+
+message PingMensagem{
+     string mensagem = 1;
+}
+
+message PongMensagem{
+     string mensagem = 1;
+}
+
+message Mensagem{
+     PingMensagem ping = 1;
+     PongMensagem pong = 2;
+     }

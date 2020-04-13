@@ -2,10 +2,9 @@ package AKKA.ping;
 
 
 import AKKA.configuracao.SpringExtension;
-import AKKA.configuracao.SpringProps;
-import AKKA.mensagem.Mensagem;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
+import akka.actor.Props;
 import com.typesafe.config.ConfigFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -36,9 +35,9 @@ public class StartPing {
                 ConfigFactory.load().getConfig("AkkaRemotePing"));
         // Criando o ator
         SpringExtension.getInstance().get(system).initialize(context);
-        ActorRef actorRef = system.actorOf(SpringProps.create(system,SupervisorAtorPing.class), "atorPing");
+        ActorRef actorRef = system.actorOf(Props.create(SupervisorAtorPing.class), "atorPing");
         // Enviando a mensagem ao ator
-        actorRef.tell(new Mensagem.Iniciar(), ActorRef.noSender());
+        actorRef.tell(new AtorPing.Iniciar(), ActorRef.noSender());
         system.getWhenTerminated();
 
     }

@@ -4,6 +4,7 @@ package AKKA.pong;
 import AKKA.configuracao.SpringExtension;
 import AKKA.configuracao.SpringProps;
 import akka.actor.ActorSystem;
+import akka.actor.Props;
 import com.typesafe.config.ConfigFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -29,7 +30,7 @@ public class StartPong {
         ActorSystem system = ActorSystem.create("AkkaRemotePong", ConfigFactory.load().getConfig("AkkaRemotePong"));
         SpringExtension.getInstance().get(system).initialize(context);
 
-        system.actorOf(SpringProps.create(system, SupervisorAtorPong.class), "AtorPong");
+        system.actorOf(Props.create(SupervisorAtorPong.class), "AtorPong");
 
         system.getWhenTerminated();
     }
