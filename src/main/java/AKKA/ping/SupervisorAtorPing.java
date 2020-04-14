@@ -7,6 +7,7 @@ import akka.event.Logging;
 import akka.event.LoggingAdapter;
 import akka.japi.Function;
 import akka.japi.pf.FI;
+import protobuf.Iniciar;
 import protobuf.PingMensagem;
 import protobuf.PongMensagem;
 import scala.concurrent.duration.Duration;
@@ -39,7 +40,7 @@ public class SupervisorAtorPing extends AbstractActor {
         return receiveBuilder().matchAny(new FI.UnitApply<Object>() {
             @Override
             public void apply(Object any) throws Exception {
-                if (any instanceof Mensagem.Iniciar) {
+                if (any instanceof Iniciar) {
                     ActorSelection atorPong = getContext().actorSelection("akka.tcp://AkkaRemotePong@127.0.0.1:2556/user/AtorPong");
                     PingMensagem pingMensagem = PingMensagem.newBuilder().setMensagem("ping").setNivel(1).build();
                     atorPong.tell(pingMensagem, getSelf());

@@ -1,7 +1,6 @@
 package AKKA.pong;
 
 import AKKA.configuracao.Actor;
-import AKKA.mensagem.Mensagem;
 import akka.actor.*;
 import akka.japi.Function;
 import akka.japi.pf.FI;

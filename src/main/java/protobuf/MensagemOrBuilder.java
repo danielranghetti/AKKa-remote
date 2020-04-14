@@ -36,4 +36,19 @@ public interface MensagemOrBuilder extends
    * <code>.serializacao.PongMensagem pong = 2;</code>
    */
   protobuf.PongMensagemOrBuilder getPongOrBuilder();
+
+  /**
+   * <code>.serializacao.Iniciar inicio = 3;</code>
+   * @return Whether the inicio field is set.
+   */
+  boolean hasInicio();
+  /**
+   * <code>.serializacao.Iniciar inicio = 3;</code>
+   * @return The inicio.
+   */
+  protobuf.Iniciar getInicio();
+  /**
+   * <code>.serializacao.Iniciar inicio = 3;</code>
+   */
+  protobuf.IniciarOrBuilder getInicioOrBuilder();
 }

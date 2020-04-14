@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import protobuf.Iniciar;
 
 import javax.annotation.PostConstruct;
 
@@ -38,7 +39,7 @@ public class StartPing {
         SpringExtension.getInstance().get(system).initialize(context);
         ActorRef actorRef = system.actorOf(SpringProps.create(system,SupervisorAtorPing.class), "atorPing");
         // Enviando a mensagem ao ator
-        actorRef.tell(new Mensagem.Iniciar(), ActorRef.noSender());
+        actorRef.tell(Iniciar.newBuilder().build(), ActorRef.noSender());
         system.getWhenTerminated();
 
     }

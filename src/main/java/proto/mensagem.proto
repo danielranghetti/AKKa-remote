@@ -15,8 +15,12 @@ message PongMensagem{
      string mensagem = 1;
       int32 nivel = 2;
 }
+message Iniciar{
+ }
 
 message Mensagem{
      PingMensagem ping = 1;
      PongMensagem pong = 2;
+     Iniciar inicio = 3;
+
      }

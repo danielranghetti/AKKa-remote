@@ -1,7 +1,6 @@
 package AKKA.pong;
 
 import AKKA.configuracao.Actor;
-import AKKA.mensagem.Mensagem;
 import akka.actor.AbstractActor;
 import akka.actor.ActorSelection;
 import akka.event.Logging;

@@ -1,11 +1,11 @@
 package AKKA.ping;
 
 import AKKA.configuracao.Actor;
-import AKKA.mensagem.Mensagem;
 import akka.actor.AbstractActor;
 import akka.actor.ActorSelection;
 import akka.event.Logging;
 import akka.event.LoggingAdapter;
+import protobuf.Iniciar;
 import protobuf.PingMensagem;
 import protobuf.PongMensagem;
 
@@ -17,7 +17,7 @@ public class AtorPing extends AbstractActor {
 
     PingMensagem pingMsg = PingMensagem.newBuilder().setMensagem("ping").setNivel(2).build();
 
-    private void inicio(Mensagem.Iniciar inicia) {
+    private void inicio(Iniciar inicia) {
         loggingAdapter.info("Iniciando o ping-pong");
         atorPong.tell(pingMsg, getSelf());
     }
@@ -28,7 +28,7 @@ public class AtorPing extends AbstractActor {
     @Override
     public Receive createReceive() {
         return receiveBuilder()
-                .match(Mensagem.Iniciar.class, this::inicio)
+                .match(Iniciar.class, this::inicio)
                 .match(PongMensagem.class, this::print)
                 .build();
     }

@@ -74,6 +74,19 @@ private static final long serialVersionUID = 0L;
 
             break;
           }
+          case 26: {
+            protobuf.Iniciar.Builder subBuilder = null;
+            if (inicio_ != null) {
+              subBuilder = inicio_.toBuilder();
+            }
+            inicio_ = input.readMessage(protobuf.Iniciar.parser(), extensionRegistry);
+            if (subBuilder != null) {
+              subBuilder.mergeFrom(inicio_);
+              inicio_ = subBuilder.buildPartial();
+            }
+
+            break;
+          }
           default: {
             if (!parseUnknownField(
                 input, unknownFields, extensionRegistry, tag)) {
@@ -152,6 +165,29 @@ private static final long serialVersionUID = 0L;
     return getPong();
   }
 
+  public static final int INICIO_FIELD_NUMBER = 3;
+  private protobuf.Iniciar inicio_;
+  /**
+   * <code>.serializacao.Iniciar inicio = 3;</code>
+   * @return Whether the inicio field is set.
+   */
+  public boolean hasInicio() {
+    return inicio_ != null;
+  }
+  /**
+   * <code>.serializacao.Iniciar inicio = 3;</code>
+   * @return The inicio.
+   */
+  public protobuf.Iniciar getInicio() {
+    return inicio_ == null ? protobuf.Iniciar.getDefaultInstance() : inicio_;
+  }
+  /**
+   * <code>.serializacao.Iniciar inicio = 3;</code>
+   */
+  public protobuf.IniciarOrBuilder getInicioOrBuilder() {
+    return getInicio();
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -172,6 +208,9 @@ private static final long serialVersionUID = 0L;
     if (pong_ != null) {
       output.writeMessage(2, getPong());
     }
+    if (inicio_ != null) {
+      output.writeMessage(3, getInicio());
+    }
     unknownFields.writeTo(output);
   }
 
@@ -188,6 +227,10 @@ private static final long serialVersionUID = 0L;
     if (pong_ != null) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(2, getPong());
+    }
+    if (inicio_ != null) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(3, getInicio());
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -214,6 +257,11 @@ private static final long serialVersionUID = 0L;
       if (!getPong()
           .equals(other.getPong())) return false;
     }
+    if (hasInicio() != other.hasInicio()) return false;
+    if (hasInicio()) {
+      if (!getInicio()
+          .equals(other.getInicio())) return false;
+    }
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -232,6 +280,10 @@ private static final long serialVersionUID = 0L;
     if (hasPong()) {
       hash = (37 * hash) + PONG_FIELD_NUMBER;
       hash = (53 * hash) + getPong().hashCode();
+    }
+    if (hasInicio()) {
+      hash = (37 * hash) + INICIO_FIELD_NUMBER;
+      hash = (53 * hash) + getInicio().hashCode();
     }
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
@@ -378,6 +430,12 @@ private static final long serialVersionUID = 0L;
         pong_ = null;
         pongBuilder_ = null;
       }
+      if (inicioBuilder_ == null) {
+        inicio_ = null;
+      } else {
+        inicio_ = null;
+        inicioBuilder_ = null;
+      }
       return this;
     }
 
@@ -413,6 +471,11 @@ private static final long serialVersionUID = 0L;
         result.pong_ = pong_;
       } else {
         result.pong_ = pongBuilder_.build();
+      }
+      if (inicioBuilder_ == null) {
+        result.inicio_ = inicio_;
+      } else {
+        result.inicio_ = inicioBuilder_.build();
       }
       onBuilt();
       return result;
@@ -467,6 +530,9 @@ private static final long serialVersionUID = 0L;
       }
       if (other.hasPong()) {
         mergePong(other.getPong());
+      }
+      if (other.hasInicio()) {
+        mergeInicio(other.getInicio());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -733,6 +799,125 @@ private static final long serialVersionUID = 0L;
         pong_ = null;
       }
       return pongBuilder_;
+    }
+
+    private protobuf.Iniciar inicio_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        protobuf.Iniciar, protobuf.Iniciar.Builder, protobuf.IniciarOrBuilder> inicioBuilder_;
+    /**
+     * <code>.serializacao.Iniciar inicio = 3;</code>
+     * @return Whether the inicio field is set.
+     */
+    public boolean hasInicio() {
+      return inicioBuilder_ != null || inicio_ != null;
+    }
+    /**
+     * <code>.serializacao.Iniciar inicio = 3;</code>
+     * @return The inicio.
+     */
+    public protobuf.Iniciar getInicio() {
+      if (inicioBuilder_ == null) {
+        return inicio_ == null ? protobuf.Iniciar.getDefaultInstance() : inicio_;
+      } else {
+        return inicioBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>.serializacao.Iniciar inicio = 3;</code>
+     */
+    public Builder setInicio(protobuf.Iniciar value) {
+      if (inicioBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        inicio_ = value;
+        onChanged();
+      } else {
+        inicioBuilder_.setMessage(value);
+      }
+
+      return this;
+    }
+    /**
+     * <code>.serializacao.Iniciar inicio = 3;</code>
+     */
+    public Builder setInicio(
+        protobuf.Iniciar.Builder builderForValue) {
+      if (inicioBuilder_ == null) {
+        inicio_ = builderForValue.build();
+        onChanged();
+      } else {
+        inicioBuilder_.setMessage(builderForValue.build());
+      }
+
+      return this;
+    }
+    /**
+     * <code>.serializacao.Iniciar inicio = 3;</code>
+     */
+    public Builder mergeInicio(protobuf.Iniciar value) {
+      if (inicioBuilder_ == null) {
+        if (inicio_ != null) {
+          inicio_ =
+            protobuf.Iniciar.newBuilder(inicio_).mergeFrom(value).buildPartial();
+        } else {
+          inicio_ = value;
+        }
+        onChanged();
+      } else {
+        inicioBuilder_.mergeFrom(value);
+      }
+
+      return this;
+    }
+    /**
+     * <code>.serializacao.Iniciar inicio = 3;</code>
+     */
+    public Builder clearInicio() {
+      if (inicioBuilder_ == null) {
+        inicio_ = null;
+        onChanged();
+      } else {
+        inicio_ = null;
+        inicioBuilder_ = null;
+      }
+
+      return this;
+    }
+    /**
+     * <code>.serializacao.Iniciar inicio = 3;</code>
+     */
+    public protobuf.Iniciar.Builder getInicioBuilder() {
+      
+      onChanged();
+      return getInicioFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.serializacao.Iniciar inicio = 3;</code>
+     */
+    public protobuf.IniciarOrBuilder getInicioOrBuilder() {
+      if (inicioBuilder_ != null) {
+        return inicioBuilder_.getMessageOrBuilder();
+      } else {
+        return inicio_ == null ?
+            protobuf.Iniciar.getDefaultInstance() : inicio_;
+      }
+    }
+    /**
+     * <code>.serializacao.Iniciar inicio = 3;</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        protobuf.Iniciar, protobuf.Iniciar.Builder, protobuf.IniciarOrBuilder> 
+        getInicioFieldBuilder() {
+      if (inicioBuilder_ == null) {
+        inicioBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            protobuf.Iniciar, protobuf.Iniciar.Builder, protobuf.IniciarOrBuilder>(
+                getInicio(),
+                getParentForChildren(),
+                isClean());
+        inicio_ = null;
+      }
+      return inicioBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(
