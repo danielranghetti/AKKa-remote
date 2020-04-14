@@ -1,14 +1,17 @@
 package AKKA.ping;
 
 import AKKA.configuracao.Actor;
+import AKKA.mensagem.Mensagem;
 import akka.actor.*;
+import akka.event.Logging;
+import akka.event.LoggingAdapter;
 import akka.japi.Function;
 import akka.japi.pf.FI;
 import scala.concurrent.duration.Duration;
 
 @Actor
 public class SupervisorAtorPing extends AbstractActor {
-
+    LoggingAdapter log = Logging.getLogger(getContext().getSystem(), this);
 
     private static SupervisorStrategy strategy = new OneForOneStrategy(3,
             Duration.create("10 second"), new Function<Throwable, SupervisorStrategy.Directive>() {
@@ -18,7 +21,10 @@ public class SupervisorAtorPing extends AbstractActor {
         }
     });
 
-    final ActorRef actorRef = getContext().actorOf(Props.create(AtorPing.class), "AtorPing");
+
+    final ActorRef atorPing = getContext().actorOf(Props.create(AtorPing.class), "AtorPingPrimeiro");
+    final ActorRef atorPingSegundo = getContext().actorOf(Props.create(AtorPing.class), "AtorPingSegundo");
+    final ActorRef atorPingTerceiro = getContext().actorOf(Props.create(AtorPing.class), "AtorPingTerceiro");
 
 
     @Override
@@ -31,8 +37,24 @@ public class SupervisorAtorPing extends AbstractActor {
         return receiveBuilder().matchAny(new FI.UnitApply<Object>() {
             @Override
             public void apply(Object any) throws Exception {
-                actorRef.forward(any, SupervisorAtorPing.this.getContext());
+                if (any instanceof Mensagem.Iniciar) {
+                    ActorSelection atorPong = getContext().actorSelection("akka.tcp://AkkaRemotePong@127.0.0.1:2556/user/AtorPong");
+                    atorPong.tell(new Mensagem.PingMsg("ping", 1), getSelf());
+                }
+                if (any instanceof Mensagem.PongMsg) {
+                    Mensagem.PongMsg msg = (Mensagem.PongMsg) any;
+                    String mensagem = msg.getMensagem() + msg.getNivel();
+                    if (mensagem.equalsIgnoreCase("pong1")) {
+                        atorPing.forward(any, SupervisorAtorPing.this.getContext());
+                    } else if (mensagem.equalsIgnoreCase("pong2")) {
+                        atorPingSegundo.forward(any, SupervisorAtorPing.this.getContext());
+                    } else if (mensagem.equalsIgnoreCase("pong3")) {
+                        atorPingTerceiro.forward(any, SupervisorAtorPing.this.getContext());
+                    }
+                }
             }
+
+
         }).build();
     }
 
