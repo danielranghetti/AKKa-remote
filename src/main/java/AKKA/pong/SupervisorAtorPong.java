@@ -5,6 +5,7 @@ import AKKA.mensagem.Mensagem;
 import akka.actor.*;
 import akka.japi.Function;
 import akka.japi.pf.FI;
+import protobuf.PingMensagem;
 import scala.concurrent.duration.Duration;
 
 @Actor
@@ -31,8 +32,8 @@ public class SupervisorAtorPong extends AbstractActor {
         return receiveBuilder().matchAny(new FI.UnitApply<Object>() {
             @Override
             public void apply(Object any) throws Exception {
-                if (any instanceof Mensagem.PingMsg) {
-                    Mensagem.PingMsg msg = (Mensagem.PingMsg) any;
+                if (any instanceof PingMensagem) {
+                    PingMensagem msg = (PingMensagem) any;
                     String mensagem = msg.getMensagem() + msg.getNivel();
                     if (mensagem.equalsIgnoreCase("ping1")) {
                         atorPong.forward(any, SupervisorAtorPong.this.getContext());
