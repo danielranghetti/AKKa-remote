@@ -1,6 +1,7 @@
-package AKKA.pong;
+package AKKA.pong.cong;
 
 import AKKA.commom.Actor;
+import AKKA.ping.config.SpringExtension;
 import akka.actor.AbstractActor;
 import akka.actor.ActorRef;
 import akka.actor.OneForOneStrategy;
@@ -8,15 +9,26 @@ import akka.actor.Props;
 import akka.actor.SupervisorStrategy;
 import akka.japi.Function;
 import akka.japi.pf.FI;
+import org.springframework.beans.factory.annotation.Autowired;
 import protobuf.PingMensagem;
 import scala.concurrent.duration.Duration;
 
 @Actor
-public class SupervisorAtorPong extends AbstractActor {
+public class SupervisorPong extends AbstractActor {
 
-    private ActorRef atorPong = getContext().actorOf(Props.create(AtorPong.class), "AtorPongPrimeiro");
-    private ActorRef atorPongSegundo = getContext().actorOf(Props.create(AtorPong.class), "AtorPongSegundo");
-    private ActorRef atorPongTerceiro = getContext().actorOf(Props.create(AtorPong.class), "AtorPongTerceiro");
+    private ActorRef atorPong;
+    private ActorRef atorPongSegundo;
+    private ActorRef atorPongTerceiro;
+
+    @Autowired
+    private SpringExtension springExtension;
+
+    public void preStart() throws Exception {
+        super.preStart();
+        atorPong = getContext().actorOf(Props.create(AtorPong.class), "AtorPong");
+        atorPongSegundo = getContext().actorOf(Props.create(AtorPong.class), "AtorPong");
+        atorPongTerceiro = getContext().actorOf(Props.create(AtorPong.class), "AtorPong");
+    }
 
     private static SupervisorStrategy strategy = new OneForOneStrategy(3,
             Duration.create("10 second"), new Function<Throwable, SupervisorStrategy.Directive>() {
@@ -39,11 +51,11 @@ public class SupervisorAtorPong extends AbstractActor {
                     PingMensagem msg = (PingMensagem) any;
                     String mensagem = msg.getMensagem() + msg.getNivel();
                     if (mensagem.equalsIgnoreCase("ping1")) {
-                        atorPong.forward(any, SupervisorAtorPong.this.getContext());
+                        atorPong.forward(any, SupervisorPong.this.getContext());
                     } else if (mensagem.equalsIgnoreCase("ping2")) {
-                        atorPongSegundo.forward(any, SupervisorAtorPong.this.getContext());
+                        atorPongSegundo.forward(any, SupervisorPong.this.getContext());
                     } else if (mensagem.equalsIgnoreCase("ping3")) {
-                        atorPongTerceiro.forward(any, SupervisorAtorPong.this.getContext());
+                        atorPongTerceiro.forward(any, SupervisorPong.this.getContext());
                     }
                 }
             }

@@ -1,4 +1,4 @@
-package AKKA.pong;
+package AKKA.pong.cong;
 
 import AKKA.commom.Actor;
 import akka.actor.AbstractActor;

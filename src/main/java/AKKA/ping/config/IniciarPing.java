@@ -1,11 +1,10 @@
-package AKKA.ping.service;
+package AKKA.ping.config;
 
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import AKKA.ping.config.SpringExtension;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import protobuf.Iniciar;
@@ -13,6 +12,8 @@ import protobuf.Iniciar;
 @Service
 public class IniciarPing {
 
+//	private String supervisorName = "supervisorAtorPing";
+	
     private ActorRef actorRef;
 
     @Autowired
@@ -28,7 +29,7 @@ public class IniciarPing {
     }
 
     private void createSupercisorActor() {
-        actorRef = actorSystem.actorOf(springExtension.props("SupervisorAtorPing"), "atorPing");
+        actorRef = actorSystem.actorOf(springExtension.props(SupervisorPing.class), "supervisor");
     }
 
     private void iniciandoActor(){

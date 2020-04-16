@@ -1,4 +1,4 @@
-package AKKA.ping.model;
+package AKKA.ping.config;
 
 import AKKA.commom.Actor;
 import akka.actor.AbstractActor;

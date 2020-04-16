@@ -1,9 +1,8 @@
-package AKKA.ping.config;
+package AKKA.pong.cong;
 
 import akka.actor.ActorSystem;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -20,7 +19,7 @@ public class ApplicationConfig {
 
     @Bean
     public ActorSystem actorSystem() {
-        ActorSystem actorSystem = ActorSystem.create("PingSystem", akkaConfiguration());
+        ActorSystem actorSystem = ActorSystem.create("PongSystem", akkaConfiguration());
         springExtension.initialize(applicationContext);
         return actorSystem;
     }
