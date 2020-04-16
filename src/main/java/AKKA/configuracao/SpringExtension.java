@@ -1,38 +1,31 @@
 package AKKA.configuracao;
 
 import akka.actor.Actor;
-import akka.actor.*;
+import akka.actor.Extension;
+import akka.actor.Props;
 import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Component;
 
-public class SpringExtension extends AbstractExtensionId<SpringExtension.SpringExt> {
+@Component
+public class SpringExtension implements Extension {
 
-    private static SpringExtension instance = new SpringExtension();
+    private ApplicationContext applicationContext;
 
-    @Override
-    public SpringExt createExtension(ExtendedActorSystem system){
-        return new SpringExt();
+    public void initialize(ApplicationContext applicationContext) {
+        this.applicationContext = applicationContext;
     }
 
-    public static SpringExtension getInstance(){
-        return instance;
+    Props props(Class<? extends Actor> actorBeansClass) {
+        return Props.create(SpringActorProducer.class, applicationContext, actorBeansClass);
     }
 
-    public static class SpringExt implements Extension{
-
-        private static ApplicationContext applicationContext;
-
-        public void initialize(ApplicationContext applicationContext){
-            SpringExt.applicationContext = applicationContext;
-        }
-
-        Props props(Class<? extends Actor> actorBeansClass){
-            return Props.create(SpringActorProducer.class, applicationContext, actorBeansClass);
-        }
-
-        Props props(Class<? extends  Actor> actorBeansClass, Object... parameters){
-            return Props.create(SpringActorProducer.class, applicationContext, actorBeansClass, parameters);
-        }
-
-
+    public Props props(Class<? extends Actor> actorBeansClass, Object... parameters) {
+        return Props.create(SpringActorProducer.class, applicationContext, actorBeansClass, parameters);
     }
+
+    public Props props(String actorBeanName) {
+        return Props.create(SpringActorProducer.class, applicationContext, actorBeanName);
+    }
+
+
 }

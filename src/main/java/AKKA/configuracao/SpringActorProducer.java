@@ -3,32 +3,26 @@ package AKKA.configuracao;
 import akka.actor.Actor;
 import akka.actor.IndirectActorProducer;
 import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Component;
 
+@Component
 public class SpringActorProducer implements IndirectActorProducer {
 
-    private final ApplicationContext applicationContext;
-    private final Class<? extends Actor> actorBeanClass;
-    private final Object[] parameters;
+    final private ApplicationContext applicationContext;
+    final private String actorBeanName;
 
-    public SpringActorProducer(ApplicationContext applicationContext, Class<? extends Actor> actorBeanClass, Object[] parameters) {
+    public SpringActorProducer(ApplicationContext applicationContext, String actorBeanName) {
         this.applicationContext = applicationContext;
-        this.actorBeanClass = actorBeanClass;
-        this.parameters = parameters;
-    }
-
-    public SpringActorProducer(ApplicationContext applicationContext, Class<? extends Actor> actorBeanClass) {
-        this.applicationContext = applicationContext;
-        this.actorBeanClass = actorBeanClass;
-        this.parameters = null;
+        this.actorBeanName = actorBeanName;
     }
 
     @Override
     public Actor produce() {
-        return applicationContext.getBean(actorBeanClass, parameters);
+        return (Actor) applicationContext.getBean(actorBeanName);
     }
 
     @Override
     public Class<? extends Actor> actorClass() {
-        return actorBeanClass;
+        return (Class<? extends Actor>) applicationContext.getType(actorBeanName);
     }
 }

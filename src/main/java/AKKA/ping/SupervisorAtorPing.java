@@ -1,20 +1,41 @@
 package AKKA.ping;
 
 import AKKA.configuracao.Actor;
-import AKKA.mensagem.Mensagem;
+import AKKA.configuracao.SpringExtension;
 import akka.actor.*;
 import akka.event.Logging;
 import akka.event.LoggingAdapter;
 import akka.japi.Function;
 import akka.japi.pf.FI;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
 import protobuf.Iniciar;
 import protobuf.PingMensagem;
 import protobuf.PongMensagem;
 import scala.concurrent.duration.Duration;
 
 @Actor
+
+@Service
+@Scope(value= BeanDefinition.SCOPE_PROTOTYPE)
 public class SupervisorAtorPing extends AbstractActor {
     LoggingAdapter log = Logging.getLogger(getContext().getSystem(), this);
+
+    ActorRef atorPing;
+    ActorRef atorPingSegundo;
+    ActorRef atorPingTerceiro;
+
+    @Autowired
+    private SpringExtension springExtension;
+
+    public void preStart() throws Exception {
+        super.preStart();
+        atorPing = getContext().actorOf(springExtension.props("AtorPingPrimeiro"));
+        atorPingSegundo = getContext().actorOf(springExtension.props("AtorPingSegundo"));
+        atorPingTerceiro = getContext().actorOf(springExtension.props("atorPingTerceiro"));
+    }
 
     private static SupervisorStrategy strategy = new OneForOneStrategy(3,
             Duration.create("10 second"), new Function<Throwable, SupervisorStrategy.Directive>() {
@@ -23,12 +44,6 @@ public class SupervisorAtorPing extends AbstractActor {
 
         }
     });
-
-
-    final ActorRef atorPing = getContext().actorOf(Props.create(AtorPing.class), "AtorPingPrimeiro");
-    final ActorRef atorPingSegundo = getContext().actorOf(Props.create(AtorPing.class), "AtorPingSegundo");
-    final ActorRef atorPingTerceiro = getContext().actorOf(Props.create(AtorPing.class), "AtorPingTerceiro");
-
 
     @Override
     public SupervisorStrategy supervisorStrategy() {
