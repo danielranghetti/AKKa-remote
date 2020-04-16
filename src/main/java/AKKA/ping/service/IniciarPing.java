@@ -1,35 +1,34 @@
-package AKKA.ping;
-
-import AKKA.configuracao.SpringExtension;
-import akka.actor.ActorRef;
-import akka.actor.ActorSystem;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import protobuf.Iniciar;
+package AKKA.ping.service;
 
 import javax.annotation.PostConstruct;
 
-@Component
-public class Teste {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import AKKA.ping.config.SpringExtension;
+import akka.actor.ActorRef;
+import akka.actor.ActorSystem;
+import protobuf.Iniciar;
+
+@Service
+public class IniciarPing {
 
     private ActorRef actorRef;
 
-//    @Autowired
+    @Autowired
     private ActorSystem actorSystem;
 
-//    @Autowired
+    @Autowired
     private SpringExtension springExtension;
 
     @PostConstruct
     void iniciar(){
         createSupercisorActor();
+        iniciandoActor();
     }
 
     private void createSupercisorActor() {
         actorRef = actorSystem.actorOf(springExtension.props("SupervisorAtorPing"), "atorPing");
-        iniciandoActor();
-
     }
 
     private void iniciandoActor(){

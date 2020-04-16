@@ -1,6 +1,6 @@
-package AKKA.ping;
+package AKKA.ping.model;
 
-import AKKA.configuracao.Actor;
+import AKKA.commom.Actor;
 import akka.actor.AbstractActor;
 import akka.actor.ActorSelection;
 import akka.event.Logging;

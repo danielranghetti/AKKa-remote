@@ -1,4 +1,4 @@
-package AKKA.configuracao;
+package AKKA.ping.config;
 
 import akka.actor.Actor;
 import akka.actor.Extension;

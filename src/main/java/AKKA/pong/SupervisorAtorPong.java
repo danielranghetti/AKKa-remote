@@ -1,7 +1,11 @@
 package AKKA.pong;
 
-import AKKA.configuracao.Actor;
-import akka.actor.*;
+import AKKA.commom.Actor;
+import akka.actor.AbstractActor;
+import akka.actor.ActorRef;
+import akka.actor.OneForOneStrategy;
+import akka.actor.Props;
+import akka.actor.SupervisorStrategy;
 import akka.japi.Function;
 import akka.japi.pf.FI;
 import protobuf.PingMensagem;

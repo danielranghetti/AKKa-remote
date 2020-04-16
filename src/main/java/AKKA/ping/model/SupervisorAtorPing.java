@@ -1,25 +1,24 @@
-package AKKA.ping;
+package AKKA.ping.model;
 
-import AKKA.configuracao.Actor;
-import AKKA.configuracao.SpringExtension;
-import akka.actor.*;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import AKKA.commom.Actor;
+import AKKA.ping.config.SpringExtension;
+import akka.actor.AbstractActor;
+import akka.actor.ActorRef;
+import akka.actor.ActorSelection;
+import akka.actor.OneForOneStrategy;
+import akka.actor.SupervisorStrategy;
 import akka.event.Logging;
 import akka.event.LoggingAdapter;
 import akka.japi.Function;
 import akka.japi.pf.FI;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Service;
 import protobuf.Iniciar;
 import protobuf.PingMensagem;
 import protobuf.PongMensagem;
 import scala.concurrent.duration.Duration;
 
 @Actor
-
-@Service
-@Scope(value= BeanDefinition.SCOPE_PROTOTYPE)
 public class SupervisorAtorPing extends AbstractActor {
     LoggingAdapter log = Logging.getLogger(getContext().getSystem(), this);
 

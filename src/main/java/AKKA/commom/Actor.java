@@ -1,4 +1,4 @@
-package AKKA.configuracao;
+package AKKA.commom;
 
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;

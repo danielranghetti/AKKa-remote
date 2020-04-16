@@ -1,4 +1,4 @@
-package AKKA.configuracao;
+package AKKA.ping.config;
 
 import akka.actor.Actor;
 import akka.actor.IndirectActorProducer;
@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class SpringActorProducer implements IndirectActorProducer {
 
-    final private ApplicationContext applicationContext;
-    final private String actorBeanName;
+    private final ApplicationContext applicationContext;
+    private final String actorBeanName;
 
     public SpringActorProducer(ApplicationContext applicationContext, String actorBeanName) {
         this.applicationContext = applicationContext;
