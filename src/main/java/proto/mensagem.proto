@@ -6,14 +6,20 @@ option java_package = "protobuf";
 option java_outer_classname = "AkkaOuterClass";
 option java_multiple_files = true;
 
+enum Nivel{
+    BAIXO = 0;
+    NORMAL = 1;
+    ALTO = 2;
+}
+
 message PingMensagem{
      string mensagem = 1;
-      int32 nivel = 2;
+      Nivel nivel = 2;
 }
 
 message PongMensagem{
      string mensagem = 1;
-      int32 nivel = 2;
+      Nivel nivel = 2;
 }
 message Iniciar{
  }
@@ -22,5 +28,6 @@ message Mensagem{
      PingMensagem ping = 1;
      PongMensagem pong = 2;
      Iniciar inicio = 3;
+     Nivel nivel = 4;
 
      }

@@ -5,6 +5,7 @@ import akka.actor.AbstractActor;
 import akka.actor.ActorSelection;
 import akka.event.Logging;
 import akka.event.LoggingAdapter;
+import protobuf.Nivel;
 import protobuf.PingMensagem;
 import protobuf.PongMensagem;
 
@@ -14,7 +15,7 @@ public class AtorPong extends AbstractActor {
     LoggingAdapter loggingAdapter = Logging.getLogger(getContext().system(), this);
 
     private ActorSelection atorPing = getContext().actorSelection("akka.tcp://AkkaRemotePing@127.0.0.1:2558/user/AtorPing");
-    PongMensagem pongMensagem = PongMensagem.newBuilder().setMensagem("pong").setNivel(3).build();
+    PongMensagem pongMensagem = PongMensagem.newBuilder().setMensagem("pong").setNivel(Nivel.ALTO).build();
 
     private void printAndReturn(PingMensagem pingMsg) {
         loggingAdapter.info("Recebendo a mensagem: " + pingMsg.getMensagem() + " " + pingMsg.getNivel());

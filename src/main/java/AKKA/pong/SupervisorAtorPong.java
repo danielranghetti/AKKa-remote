@@ -4,6 +4,7 @@ import AKKA.configuracao.Actor;
 import akka.actor.*;
 import akka.japi.Function;
 import akka.japi.pf.FI;
+import protobuf.Nivel;
 import protobuf.PingMensagem;
 import scala.concurrent.duration.Duration;
 
@@ -30,16 +31,15 @@ public class SupervisorAtorPong extends AbstractActor {
     public Receive createReceive() {
         return receiveBuilder().matchAny(new FI.UnitApply<Object>() {
             @Override
-            public void apply(Object any) throws Exception {
-                if (any instanceof PingMensagem) {
-                    PingMensagem msg = (PingMensagem) any;
-                    String mensagem = msg.getMensagem() + msg.getNivel();
-                    if (mensagem.equalsIgnoreCase("ping1")) {
-                        atorPong.forward(any, SupervisorAtorPong.this.getContext());
-                    } else if (mensagem.equalsIgnoreCase("ping2")) {
-                        atorPongSegundo.forward(any, SupervisorAtorPong.this.getContext());
-                    } else if (mensagem.equalsIgnoreCase("ping3")) {
-                        atorPongTerceiro.forward(any, SupervisorAtorPong.this.getContext());
+            public void apply(Object mensagem) throws Exception {
+                if (mensagem instanceof PingMensagem) {
+                    PingMensagem pingMensagem = (PingMensagem) mensagem;
+                    if (pingMensagem.getNivel().equals(Nivel.BAIXO) ) {
+                        atorPong.forward(mensagem, SupervisorAtorPong.this.getContext());
+                    } else if (pingMensagem.getNivel().equals(Nivel.NORMAL)) {
+                        atorPongSegundo.forward(mensagem, SupervisorAtorPong.this.getContext());
+                    } else if (pingMensagem.getNivel().equals(Nivel.ALTO)) {
+                        atorPongTerceiro.forward(mensagem, SupervisorAtorPong.this.getContext());
                     }
                 }
             }

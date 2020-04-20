@@ -51,4 +51,15 @@ public interface MensagemOrBuilder extends
    * <code>.serializacao.Iniciar inicio = 3;</code>
    */
   protobuf.IniciarOrBuilder getInicioOrBuilder();
+
+  /**
+   * <code>.serializacao.Nivel nivel = 4;</code>
+   * @return The enum numeric value on the wire for nivel.
+   */
+  int getNivelValue();
+  /**
+   * <code>.serializacao.Nivel nivel = 4;</code>
+   * @return The nivel.
+   */
+  protobuf.Nivel getNivel();
 }

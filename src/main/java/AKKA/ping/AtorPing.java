@@ -6,6 +6,7 @@ import akka.actor.ActorSelection;
 import akka.event.Logging;
 import akka.event.LoggingAdapter;
 import protobuf.Iniciar;
+import protobuf.Nivel;
 import protobuf.PingMensagem;
 import protobuf.PongMensagem;
 
@@ -15,7 +16,7 @@ public class AtorPing extends AbstractActor {
 
     private ActorSelection atorPong = getContext().actorSelection("akka.tcp://AkkaRemotePong@127.0.0.1:2556/user/AtorPong");
 
-    PingMensagem pingMsg = PingMensagem.newBuilder().setMensagem("ping").setNivel(2).build();
+    PingMensagem pingMsg = PingMensagem.newBuilder().setMensagem("ping").setNivel(Nivel.ALTO).build();
 
     private void inicio(Iniciar inicia) {
         loggingAdapter.info("Iniciando o ping-pong");

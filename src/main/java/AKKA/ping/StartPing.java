@@ -3,7 +3,6 @@ package AKKA.ping;
 
 import AKKA.configuracao.SpringExtension;
 import AKKA.configuracao.SpringProps;
-import AKKA.mensagem.Mensagem;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import com.typesafe.config.ConfigFactory;

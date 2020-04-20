@@ -3,13 +3,15 @@
 
 package protobuf;
 
+import com.google.protobuf.MessageOrBuilder;
+
 /**
  * Protobuf type {@code serializacao.Iniciar}
  */
 public  final class Iniciar extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:serializacao.Iniciar)
-    IniciarOrBuilder {
+        // @@protoc_insertion_point(message_implements:serializacao.Iniciar)
+        MessageOrBuilder, IniciarOrBuilder {
 private static final long serialVersionUID = 0L;
   // Use Iniciar.newBuilder() to construct.
   private Iniciar(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
@@ -230,7 +232,7 @@ private static final long serialVersionUID = 0L;
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
       // @@protoc_insertion_point(builder_implements:serializacao.Iniciar)
-      protobuf.IniciarOrBuilder {
+          com.google.protobuf.MessageOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return protobuf.AkkaOuterClass.internal_static_serializacao_Iniciar_descriptor;

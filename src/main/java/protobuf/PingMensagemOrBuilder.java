@@ -20,8 +20,13 @@ public interface PingMensagemOrBuilder extends
       getMensagemBytes();
 
   /**
-   * <code>int32 nivel = 2;</code>
+   * <code>.serializacao.Nivel nivel = 2;</code>
+   * @return The enum numeric value on the wire for nivel.
+   */
+  int getNivelValue();
+  /**
+   * <code>.serializacao.Nivel nivel = 2;</code>
    * @return The nivel.
    */
-  int getNivel();
+  protobuf.Nivel getNivel();
 }
